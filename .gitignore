@@ -33,3 +33,9 @@ override.tf.json
 .terraformrc
 terraform.rc
 .terraform.*
+/.idea/.idea.xpe-module-3-trabalho-pratico.dir/.idea
+/backend-lambdas/EC2ManagementApis/.vs/EC2ManagementApis
+/backend-lambdas/EC2ManagementApis/ChangeInstanceType.Lambda/obj
+/backend-lambdas/EC2ManagementApis/StartInstance.Lambda/obj
+/backend-lambdas/EC2ManagementApis/StopInstance.Lambda/obj
+/backend-lambdas/EC2ManagementApis/EC2Management.Common/obj
