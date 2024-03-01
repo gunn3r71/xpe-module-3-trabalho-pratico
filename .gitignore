@@ -43,3 +43,4 @@ terraform.rc
 /backend-lambdas/EC2ManagementApis/EC2Management.Common/bin
 /backend-lambdas/EC2ManagementApis/StartInstance.Lambda/bin/Release/net6.0
 /backend-lambdas/EC2ManagementApis/StopInstance.Lambda/bin
+/backend-lambdas/EC2ManagementApis/ChangeInstanceType.Lambda/bin/Debug/net6.0

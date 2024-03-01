@@ -34,6 +34,13 @@ public class Function
                 return;
             }
 
+            StopInstancesRequest stopInstancesRequest = new()
+            {
+                InstanceIds = instanceIds.ToList()
+            };
+
+            await ec2Client.StopInstancesAsync(stopInstancesRequest);
+
             List<Task> tasks = new(instanceIds.Count());
 
             foreach (var instanceId in instanceIds) 
@@ -41,13 +48,20 @@ public class Function
                 var modifyInstanceTypeRequest = new ModifyInstanceAttributeRequest()
                 {
                     InstanceId = instanceId,
-                    InstanceType = instanceType
+                    InstanceType = new InstanceType(instanceType)
                 };
 
                 tasks.Add(ec2Client.ModifyInstanceAttributeAsync(modifyInstanceTypeRequest));
             }
 
             await Task.WhenAll(tasks);
+
+            StartInstancesRequest request = new()
+            {
+                InstanceIds = instanceIds.ToList(),
+            };
+
+            await ec2Client.StartInstancesAsync(request);
 
             context.Logger.LogInformation("[Change Instance Type] - Finalizando execução da lambda");
         }
