@@ -7,6 +7,7 @@ resource "aws_instance" "xpe-desafio" {
   tags = {
     Name = "xpe-ec2-webserver-desafio-1"
     Course = var.course_tag
+    EligibleForHandler =true
   }
 }
 
