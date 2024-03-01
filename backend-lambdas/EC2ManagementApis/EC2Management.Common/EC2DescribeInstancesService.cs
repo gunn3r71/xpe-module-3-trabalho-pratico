@@ -16,15 +16,12 @@ namespace EC2Management.Common
             _client = client;
         }
 
-        public async Task<IEnumerable<string>> GetInstanceIdsAsync()
+        public async Task<IEnumerable<string>> GetInstanceIdsAsync(params Filter[] filters)
         {
-            var getInstancesRequest = new DescribeInstancesRequest()
-            {
-                Filters =
-                {
-                    EC2InstancesFilter.EligibleForHandler
-                }
-            };
+            var getInstancesRequest = new DescribeInstancesRequest();
+
+            if (filters != null)
+                getInstancesRequest.Filters = filters.ToList();
 
             DescribeInstancesResponse instances = await _client.DescribeInstancesAsync(getInstancesRequest);
 

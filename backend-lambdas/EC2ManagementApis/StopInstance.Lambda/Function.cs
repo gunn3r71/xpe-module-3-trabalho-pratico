@@ -26,7 +26,7 @@ public class Function
             using var ec2Client = new AmazonEC2Client();
             IEC2DescribeInstancesService ec2DescribeInstancesService = new EC2DescribeInstancesService(ec2Client);
 
-            var instanceIds = await ec2DescribeInstancesService.GetInstanceIdsAsync();
+            var instanceIds = await ec2DescribeInstancesService.GetInstanceIdsAsync(EC2InstancesFilter.EligibleForHandler, EC2InstancesFilter.RunningInstance);
 
             if (!instanceIds.Any())
             {
