@@ -34,13 +34,6 @@ public class Function
                 return;
             }
 
-            StopInstancesRequest stopInstancesRequest = new()
-            {
-                InstanceIds = instanceIds.ToList()
-            };
-
-            await ec2Client.StopInstancesAsync(stopInstancesRequest);
-
             List<Task> tasks = new(instanceIds.Count());
 
             foreach (var instanceId in instanceIds) 
@@ -56,18 +49,11 @@ public class Function
 
             await Task.WhenAll(tasks);
 
-            StartInstancesRequest request = new()
-            {
-                InstanceIds = instanceIds.ToList(),
-            };
-
-            await ec2Client.StartInstancesAsync(request);
-
             context.Logger.LogInformation("[Change Instance Type] - Finalizando execução da lambda");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            context.Logger.LogError("[Change Instance Type] - Lambda executou com falha");
+            context.Logger.LogError($"[Change Instance Type] - Lambda executou com falha - {ex.Message}");
         }
     }
 }
